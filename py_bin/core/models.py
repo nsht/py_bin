@@ -11,10 +11,10 @@ class Bin(models.Model):
     content_format = models.CharField(max_length=10)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True, null=True, blank=True)
-    view_count = models.IntegerField(null=True, blank=True)
+    view_count = models.IntegerField(default=0)
     status = models.IntegerField(validators=[MaxValueValidator(5)])
     protected = models.BooleanField()
-    password = models.CharField(max_length=50)
+    password = models.CharField(max_length=50,null=True, blank=True)
     expiry = models.DateTimeField(blank=True, null=True)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
