@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator
 
 # Create your models here.
 
@@ -10,8 +11,8 @@ class Bin(models.Model):
     content_format = models.CharField(max_length=10)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True, null=True, blank=True)
-    view_count = models.IntegerField(max_length=300, null=True, blank=True)
-    status = models.IntegerField(max_length=5)
+    view_count = models.IntegerField(null=True, blank=True)
+    status = models.IntegerField(validators=[MaxValueValidator(5)])
     protected = models.BooleanField()
     password = models.CharField(max_length=50)
     expiry = models.DateTimeField(blank=True, null=True)
