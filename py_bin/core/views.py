@@ -11,9 +11,12 @@ from .models import Bin
 from .serializers import *
 
 
+import pdb
+
+
 class BinViewSet(viewsets.ModelViewSet):
     # TODO only show public objects
-    queryset = Bin.objects.all()
+    queryset = Bin.objects.all().filter(protected=False)
     permission_classes = [permissions.AllowAny]
     serializer_class = BinSerializer
 
@@ -25,12 +28,12 @@ class BinViewSet(viewsets.ModelViewSet):
             content=request.data.get("content"),
             content_format=request.data.get("content_format"),
         )
-        bin.save()
-        import pdb
+
         pdb.set_trace()
+        bin.save()
         return Response(status=status.HTTP_200_OK)
 
-# TODO Move function to helper file
+    # TODO Move function to helper file
     def generate_slug(self):
         random.seed(time.time())
         chars = string.ascii_letters + string.digits
