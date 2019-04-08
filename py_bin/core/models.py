@@ -6,7 +6,7 @@ from django.core.validators import MaxValueValidator
 
 
 class Bin(models.Model):
-    slug = models.CharField(max_length=10, unique=True)
+    slug = models.CharField(max_length=10, unique=True,blank=True)
     content = models.TextField()
     content_format = models.CharField(max_length=10)
     created = models.DateTimeField(auto_now_add=True)
