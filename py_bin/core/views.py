@@ -15,7 +15,6 @@ import pdb
 
 
 class BinViewSet(viewsets.ModelViewSet):
-    # TODO only show public objects
     queryset = Bin.objects.all().filter(protected=False)
     permission_classes = [permissions.AllowAny]
     serializer_class = BinSerializer
@@ -28,8 +27,10 @@ class BinViewSet(viewsets.ModelViewSet):
             content=request.data.get("content"),
             content_format=request.data.get("content_format"),
         )
+        if request.data.get("password") != "":
+            bin.protected = True
+            bin.password = request.data.get("password")
 
-        pdb.set_trace()
         bin.save()
         return Response(status=status.HTTP_200_OK)
 
