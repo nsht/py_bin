@@ -14,6 +14,7 @@ class Bin(models.Model):
     view_count = models.IntegerField(default=0)
     status = models.IntegerField(validators=[MaxValueValidator(5)],default=1)
     protected = models.BooleanField(default=False)
+    is_public = models.BooleanField(default=True)
     password = models.CharField(max_length=50,null=True, blank=True)
     expiry = models.DateTimeField(blank=True, null=True)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)

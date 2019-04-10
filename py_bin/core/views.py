@@ -15,7 +15,7 @@ import pdb
 
 
 class BinViewSet(viewsets.ModelViewSet):
-    queryset = Bin.objects.all().filter(protected=False)
+    queryset = Bin.objects.all().filter(protected=False,private=False)
     permission_classes = [permissions.AllowAny]
     serializer_class = BinSerializer
 
@@ -34,6 +34,7 @@ class BinViewSet(viewsets.ModelViewSet):
         )
         if request.data.get("password") != "":
             bin.protected = True
+            bin.is_public = False
             # uses PBKDF2 by default, use check_password to verify passwords
             bin.password = make_password(request.data.get("password"))
         bin.save()
