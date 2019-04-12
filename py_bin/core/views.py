@@ -15,7 +15,7 @@ import pdb
 
 
 class BinViewSet(viewsets.ModelViewSet):
-    queryset = Bin.objects.all().filter(protected=False, is_public=False)
+    queryset = Bin.objects.all().filter(protected=False, is_public=True)
     permission_classes = [permissions.AllowAny]
     serializer_class = BinSerializer
 
